@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        box-sizing: border-box;
+        overflow: hidden;
+      }
+      .grass {
+        height: 20px;
+        background: rgb(5, 165, 5);
+        border-top: 5px solid green;
+      }
+      .dirt {
+        height: 150px;
+        border-top: 5px solid rgb(116, 84, 8);
+        background: rgb(96, 69, 0);
+      }
+      .image-container {
+        position: relative;
+      }
+      .sunflower-img {
+        position: absolute;
+        top: -510px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: auto;
+        transition: transform 0.5s ease-in-out; /* Added for a smooth transition effect */
+      }
+      .prompt {
+        right: 200px !important;
+      }
+    </style>
+    <title>Sunflower</title>
+  </head>
+  <body>
+    <div
+      class="container d-flex align-items-center flex-column justify-content-center"
+    >
+      <h1 class="d-block">Sunflower</h1>
+      <button class="btn btn-warning text-white" id="btnSunflower">
+        Grow sunflower
+      </button>
+      <div class="prompt top-20 end-50 position-absolute d-none" id="prompt">
+        <div class="container text-center">
+          <h5>Galing ng gawa ko no?</h5>
+          <a href="./Assets/open me.html"
+            ><button class="btn btn-primary me-1">Yes</button></a
+          >
+          <a href="./Assets/open me.html"
+            ><button class="btn btn-secondary ms-1">No</button></a
+          >
+        </div>
+      </div>
+    </div>
+    <div
+      class="container-fluid d-flex flex-column-reverse vh-100 text-white px-0"
+    >
+      <div class="container-fluid dirt text-dark p-0"></div>
+      <div class="container-fluid grass text-dark p-0"></div>
+      <div class="image-container" id="sunflowerContainer">
+        <img
+          src="./Assets/sunflower.jpg"
+          alt="Sunflower"
+          class="sunflower-img"
+          id="originalSunflower"
+        />
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document
+        .getElementById("btnSunflower")
+        .addEventListener("click", duplicateSunflower);
+      var clickCount = 0;
+      var displayPrompt = document.getElementById("prompt");
+      function duplicateSunflower() {
+        clickCount += 1;
+        console.log(clickCount);
+        var displayPrompt = document.getElementById("prompt");
+        if (clickCount == 5) {
+          displayPrompt.classList.remove("d-none");
+        }
+        var originalSunflower = document.getElementById("originalSunflower");
+
+        var newSunflower = originalSunflower.cloneNode(true);
+
+        var randomX = Math.floor(Math.random() * window.innerWidth);
+
+        newSunflower.style.left = randomX + "px";
+
+        document.getElementById("sunflowerContainer").appendChild(newSunflower);
+
+        setTimeout(function () {
+          newSunflower.style.transform = "translateY(0)";
+        }, 10);
+      }
+    </script>
+  </body>
+</html>
